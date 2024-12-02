@@ -1,9 +1,13 @@
 body {
-    background-color: #191414;
-    color: #FFFFFF;
-    font-family: Arial, sans-serif;
-    margin: 20px;
-  }
+  background-image: url('../images/background.jpg'); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire page */
+  background-position: center; /* Centers the image */
+  background-attachment: fixed; /* Keeps the background fixed when scrolling */
+  color: #FFFFFF; /* Keeps text readable on darker backgrounds */
+  font-family: 'Poppins', sans-serif; /* Ensures consistent typography */
+  margin: 0;
+  padding: 0;
+}
   input, button {
     margin: 10px 0;
     padding: 10px;
