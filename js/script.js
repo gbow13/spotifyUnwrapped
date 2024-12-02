@@ -22,14 +22,14 @@ function calculateAndGenerate() {
 
   const totalEarnings = totalStreams * earningsPerStream;
 
-  // Update result text
-  const resultMessage = `
-    <p>Total Spotify subscription for the year: <strong><span class="highlight">£${yearlySubscription.toFixed(2)}</span></strong>.</p>
-    <p>Spotify paid approximately <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong> to your favorite artist.</p>
-    <p>Fully independent artists will receive approx. 90% of that money. Artists signed to record labels can receive anywhere from 5% to 50% of this amount.</p>
-    <p>If you can, support your favourite artists in other ways like buying merch, attending live shows, or even subscribing to their OnlyFans.</p>
-  `;
-  document.getElementById('result').innerHTML = resultMessage;
+// Update result text
+const resultMessage = `
+<p>Total Spotify subscription for the year: <strong><span class="highlight">£${yearlySubscription.toFixed(2)}</span></strong>.</p>
+<p>Spotify paid approximately <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong> to your favorite artist.</p>
+<p style="font-weight: normal;">Fully independent artists will receive approx. 90% of that money. Artists signed to a record label could receive anything from 5%-50% of this amount.</p>
+<p>However you look at it, we need to #FixStreaming.</p> <p style="font-weight: normal;">If you can, support your favourite artists in other ways like buying merch, attending live shows, or subscribing to their OnlyFans.</p>
+`;
+document.getElementById('result').innerHTML = resultMessage;
 
   // Generate Shareable Image
   generateImage(yearlySubscription, totalEarnings.toFixed(2));
@@ -78,9 +78,10 @@ function generateImage(yearlySubscription, totalEarnings) {
       const img = canvas.toDataURL('image/jpeg');
       const imagePreview = document.getElementById('imagePreview');
       imagePreview.innerHTML = `
+        <p>Please share this image on your social media and spread the word.</p>
         <img src="${img}" alt="Generated Image" style="max-width: 100%; margin: 20px 0;" />
         <a href="${img}" download="spotify-unwrapped-2024.jpg">Download</a>
-        <p>Please share this image on your social media</p>
+        
       `;
 
       // Remove the container after rendering
