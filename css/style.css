@@ -21,6 +21,18 @@ body {
     width: calc(100% - 22px); /* Adjusts width to account for padding */
     box-sizing: border-box; /* Ensures padding is included in width */
   }
+  .radio-options label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .radio-options input[type="radio"] {
+    margin-left: 0;
+    margin-right: 8px; /* Small gap between label and radio button */
+    transform: scale(1.2); /* Optional: Increase size for better usability */
+  }
   
   input:focus {
     border-color: #1AA34A; /* Change border color on focus */
