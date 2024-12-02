@@ -5,11 +5,11 @@ function calculateAndGenerate() {
   const earningsPerStream = 1.28 / 543; // £1.28 for 543 streams
 
   // Get the selected plan value or default to Single (£11.99/month)
-  const selectedPlan = document.querySelector('input[name="plan"]:checked');
-  let monthlyCost = selectedPlan ? parseFloat(selectedPlan.value) : 11.99;
+  const selectedPlan = document.getElementById('plan').value;
+  let monthlyCost = parseFloat(selectedPlan);
 
   // Adjust Duo plan to reflect cost per user
-  if (selectedPlan && selectedPlan.value === "16.99") {
+  if (selectedPlan === "16.99") {
     monthlyCost = monthlyCost / 2; // Divide Duo cost by 2
   }
 
@@ -24,15 +24,20 @@ function calculateAndGenerate() {
 
   // Update result text
   const resultMessage = `
-  <p>Total Spotify subscription for the year: <strong><span class="highlight">£${yearlySubscription.toFixed(2)}</span></strong>.</p>
-  <p>Spotify paid approximately <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong> to your favorite artist.</p>
-  <p>Fully independent artists will receive all of that money. Artists signed to record labels could receive just 20%-50% of this amount.</p>
-  <p>If you can, support your favourite artists in other ways like buying merch, attending live shows (or subscribing to their OnlyFans).</p>
-`;
+    <p>Total Spotify subscription for the year: <strong><span class="highlight">£${yearlySubscription.toFixed(2)}</span></strong>.</p>
+    <p>Spotify paid approximately <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong> to your favorite artist.</p>
+    <p>Fully independent artists will receive all of that money. Artists signed to record labels could receive just 20%-50% of this amount.</p>
+    <p>If you can, support your favourite artists in other ways like buying merch, attending live shows, or subscribing to their OnlyFans.</p>
+  `;
   document.getElementById('result').innerHTML = resultMessage;
 
   // Generate Shareable Image
   generateImage(yearlySubscription, totalEarnings.toFixed(2));
+
+  // Automatically scroll to the results section
+  setTimeout(() => {
+    document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+  }, 500);
 }
 
 function generateImage(yearlySubscription, totalEarnings) {
@@ -73,10 +78,9 @@ function generateImage(yearlySubscription, totalEarnings) {
       const img = canvas.toDataURL('image/jpeg');
       const imagePreview = document.getElementById('imagePreview');
       imagePreview.innerHTML = `
-        <p>Please share the image below on your social media. Let's spread the word.</p>
         <img src="${img}" alt="Generated Image" style="max-width: 100%; margin: 20px 0;" />
         <a href="${img}" download="spotify-unwrapped-2024.jpg">Download</a>
-        
+        <p>Please share this image on your social media</p>
       `;
 
       // Remove the container after rendering
