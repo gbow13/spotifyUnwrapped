@@ -22,14 +22,14 @@ function calculateAndGenerate() {
 
   const totalEarnings = totalStreams * earningsPerStream;
 
-// Update result text
-const resultMessage = `
-<p>Total Spotify subscription for the year: <strong><span class="highlight">£${yearlySubscription.toFixed(2)}</span></strong>.</p>
-<p>Spotify paid approximately <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong> to your favorite artist.</p>
-<p style="font-weight: normal;">Fully independent artists will receive approx. 90% of that money. Artists signed to a record label could receive anything from 5%-50% of this amount.</p>
-<p>However you look at it, we need to #FixStreaming.</p> <p style="font-weight: normal;">If you can, support your favourite artists in other ways like buying merch, attending live shows, or subscribing to their OnlyFans.</p>
-`;
-document.getElementById('result').innerHTML = resultMessage;
+  // Update result text
+  const resultMessage = `
+    <p>Total Spotify subscription for the year: <strong><span class="highlight">£${yearlySubscription.toFixed(2)}</span></strong>.</p>
+    <p>Spotify paid approximately <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong> to your favorite artist.</p>
+    <p>Fully independent artists will receive all of that money. Artists signed to record labels could receive just 20%-50% of this amount.</p>
+    <p style="font-weight: normal;">If you can, support your favourite artists in other ways like buying merch, attending live shows, or subscribing to their OnlyFans.</p>
+  `;
+  document.getElementById('result').innerHTML = resultMessage;
 
   // Generate Shareable Image
   generateImage(yearlySubscription, totalEarnings.toFixed(2));
@@ -57,13 +57,21 @@ function generateImage(yearlySubscription, totalEarnings) {
   `;
 
   resultContainer.innerHTML = `
-    <img src="images/logo.png" alt="Spotify Logo" style="width: 400px; margin-bottom: 30px;">
-    <h2 style="font-size: 64px; margin-bottom: 40px; color: #1DB954;">Spotify Unwrapped 2024</h2>
-    <p style="font-size: 48px; margin-bottom: 20px;">I paid <strong>£${yearlySubscription.toFixed(2)}</strong> to Spotify.</p>
+    <img src="images/logo.png" alt="Spotify Unwrapped Logo" style="width: 700px; margin-bottom: 20px;">
+    <img src="images/spotify.png" alt="Spotify Logo" style="width: 700px; margin-bottom: 40px;">
+    <p style="font-size: 48px; margin-bottom: 20px;">In 2024, I paid <strong>£${yearlySubscription.toFixed(2)}</strong> to Spotify.</p>
     <p style="font-size: 48px; margin-bottom: 40px;">Spotify paid <strong>£${totalEarnings}</strong> to my favorite artist.</p>
-    <p style="font-size: 32px; color: #666;">Find out how much Spotify paid your favorite artist at</p>
-    <p style="font-size: 40px; font-weight: bold;">spotify-unwrapped.com</p>
+    <p style="font-size: 40px; color: #666;">It's time to #FixStreaming</p>
+    <p style="font-size: 70px; font-weight: bold;">spotify-unwrapped.com</p>
   `;
+
+  
+  resultContainer.style.backgroundSize = "cover";
+  resultContainer.style.backgroundPosition = "center";
+
+
+  resultContainer.style.backgroundSize = "cover";
+  resultContainer.style.backgroundPosition = "center";
 
   // Temporarily append the container to the body for rendering
   document.body.appendChild(resultContainer);
@@ -78,10 +86,10 @@ function generateImage(yearlySubscription, totalEarnings) {
       const img = canvas.toDataURL('image/jpeg');
       const imagePreview = document.getElementById('imagePreview');
       imagePreview.innerHTML = `
-        <p>Please share this image on your social media and spread the word.</p>
+        <p>Please share the image below on your socials</p> 
         <img src="${img}" alt="Generated Image" style="max-width: 100%; margin: 20px 0;" />
         <a href="${img}" download="spotify-unwrapped-2024.jpg">Download</a>
-        
+       
       `;
 
       // Remove the container after rendering
