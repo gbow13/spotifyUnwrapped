@@ -1,2 +1,2 @@
 # SpotifyUnwrapped
-A website to highlight how little Spotify pays artists. 
+A website to highlight how much (or little) Spotify pays artists. 
