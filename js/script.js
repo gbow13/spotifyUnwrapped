@@ -22,12 +22,12 @@ function calculateAndGenerate() {
 
   const totalEarnings = totalStreams * earningsPerStream;
 
-  // Update result text
-  const resultMessage = `
+    // Update result text
+    const resultMessage = `
     <p>Total Spotify subscription for the year: <strong><span class="highlight">£${yearlySubscription.toFixed(2)}</span></strong>.</p>
-    <p>Spotify paid approximately <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong> to your favorite artist(s).</p>
+    <p>Spotify paid approximately <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong> to your favorite artist.</p>
     <p style="font-weight: normal;">Fully independent artists will receive approx. 90% of that money. Artists signed to record labels could receive anywhere from 5% to 50% depending on their record deal.</p>
-    <p>If you can, support your favourite artists in other ways like buying merch, attending live shows, or subscribing to their OnlyFans.</p>
+    <p style="font-weight: normal;">If you can, support your favourite artists in other ways like buying merch, attending live shows, or <a href='https://www.independent.co.uk/arts-entertainment/music/news/kate-nash-onlyfans-earnings-tour-subscribers-b2657173.html' target='_blank' style='color: #1DB954;'>subscribing to their OnlyFans</a>.</p>
   `;
   document.getElementById('result').innerHTML = resultMessage;
 
