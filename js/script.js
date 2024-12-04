@@ -25,7 +25,7 @@ function calculateAndGenerate() {
   // Update result text
   const resultMessage = `
     <p>Total Spotify subscription for the year: <strong><span class="highlight">£${yearlySubscription.toFixed(2)}</span></strong>.</p>
-    <p>Spotify paid approximately <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong> to your favorite artist.</p>
+    <p>Spotify paid approximately <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong> to your favorite artist(s).</p>
     <p style="font-weight: normal;">Fully independent artists will receive approx. 90% of that money. Artists signed to record labels could receive anywhere from 5% to 50% depending on their record deal.</p>
     <p>If you can, support your favourite artists in other ways like buying merch, attending live shows, or subscribing to their OnlyFans.</p>
   `;
@@ -62,8 +62,8 @@ function generateImage(yearlySubscription, totalEarnings, userInput, inputType) 
     <img src="images/logo.png" alt="Spotify Unwrapped Logo" style="width: 600px; margin-bottom: 20px;">
     <img src="images/spotify.png" alt="Spotify Logo" style="width: 700px; margin-bottom: 40px;">
     <p style="font-size: 48px; margin-bottom: 20px;">I paid <strong>£${yearlySubscription.toFixed(2)}</strong> to Spotify.</p>
-    <p style="font-size: 48px; margin-bottom: 20px;">Spotify paid <strong>£${totalEarnings}</strong> to my favorite artist for ${userInput.toLocaleString()} ${inputType}.</p>
-    <p style="font-size: 32px; color: #666;">Find out how much Spotify paid your favorite artist at</p>
+    <p style="font-size: 48px; margin-bottom: 20px;">Spotify paid <strong>£${totalEarnings}</strong> to my favorite artist(s) for ${userInput.toLocaleString()} ${inputType}.</p>
+    <p style="font-size: 32px; color: #666;">Find out how much (or) Spotify paid your favorite artists at</p>
     <p style="font-size: 40px; font-weight: bold;">spotify-unwrapped.com</p>
   `;
 
