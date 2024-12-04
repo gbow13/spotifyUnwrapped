@@ -32,7 +32,9 @@ function calculateAndGenerate() {
   document.getElementById('result').innerHTML = resultMessage;
 
   // Generate Shareable Image
-  generateImage(yearlySubscription, totalEarnings.toFixed(2));
+  const userInput = streams > 0 ? streams : minutes;
+  const inputType = streams > 0 ? 'streams' : 'minutes';
+  generateImage(yearlySubscription, totalEarnings.toFixed(2), userInput, inputType);
 
   // Automatically scroll to the results section
   setTimeout(() => {
@@ -40,7 +42,7 @@ function calculateAndGenerate() {
   }, 500);
 }
 
-function generateImage(yearlySubscription, totalEarnings) {
+function generateImage(yearlySubscription, totalEarnings, userInput, inputType) {
   const resultContainer = document.createElement('div');
   resultContainer.className = 'result-container';
   resultContainer.style.cssText = `
@@ -57,21 +59,13 @@ function generateImage(yearlySubscription, totalEarnings) {
   `;
 
   resultContainer.innerHTML = `
-    <img src="images/logo.png" alt="Spotify Unwrapped Logo" style="width: 700px; margin-bottom: 20px;">
+    <img src="images/logo.png" alt="Spotify Unwrapped Logo" style="width: 600px; margin-bottom: 20px;">
     <img src="images/spotify.png" alt="Spotify Logo" style="width: 700px; margin-bottom: 40px;">
-    <p style="font-size: 48px; margin-bottom: 20px;">In 2024, I paid <strong>£${yearlySubscription.toFixed(2)}</strong> to Spotify.</p>
-    <p style="font-size: 48px; margin-bottom: 40px;">Spotify paid <strong>£${totalEarnings}</strong> to my favorite artist.</p>
-    <p style="font-size: 40px; color: #666;">It's time to #FixStreaming</p>
-    <p style="font-size: 70px; font-weight: bold;">spotify-unwrapped.com</p>
+    <p style="font-size: 48px; margin-bottom: 20px;">I paid <strong>£${yearlySubscription.toFixed(2)}</strong> to Spotify.</p>
+    <p style="font-size: 48px; margin-bottom: 20px;">Spotify paid <strong>£${totalEarnings}</strong> to my favorite artist for ${userInput.toLocaleString()} ${inputType}.</p>
+    <p style="font-size: 32px; color: #666;">Find out how much Spotify paid your favorite artist at</p>
+    <p style="font-size: 40px; font-weight: bold;">spotify-unwrapped.com</p>
   `;
-
-  
-  resultContainer.style.backgroundSize = "cover";
-  resultContainer.style.backgroundPosition = "center";
-
-
-  resultContainer.style.backgroundSize = "cover";
-  resultContainer.style.backgroundPosition = "center";
 
   // Temporarily append the container to the body for rendering
   document.body.appendChild(resultContainer);
@@ -86,10 +80,9 @@ function generateImage(yearlySubscription, totalEarnings) {
       const img = canvas.toDataURL('image/jpeg');
       const imagePreview = document.getElementById('imagePreview');
       imagePreview.innerHTML = `
-        <p>Please share the image below on your socials</p> 
+        <p>Please share this image on your social media and spread the word.</p>
         <img src="${img}" alt="Generated Image" style="max-width: 100%; margin: 20px 0;" />
         <a href="${img}" download="spotify-unwrapped-2024.jpg">Download</a>
-       
       `;
 
       // Remove the container after rendering
@@ -99,3 +92,4 @@ function generateImage(yearlySubscription, totalEarnings) {
       console.error("Error generating image:", error);
     });
 }
+
