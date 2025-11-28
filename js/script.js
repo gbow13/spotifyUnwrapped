@@ -28,7 +28,7 @@ function calculateAndGenerate() {
     <p>Total Spotify subscription for the year: <strong><span class="highlight">£${yearlySubscription.toFixed(2)}</span></strong>.</p>
     <p>Spotify paid approximately <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong> to your favorite artist.</p>
     <p>Fully independent artists will receive all of that money. Artists signed to record labels could receive just 20%-50% of this amount.</p>
-    <p style="font-weight: normal;">If you can, support your favourite artists in other ways like buying merch, attending live shows, or <a href='https://www.independent.co.uk/arts-entertainment/music/news/kate-nash-onlyfans-earnings-tour-subscribers-b2657173.html' target='_blank' style='color: #1DB954;'>subscribing to their OnlyFans</a>.</p>
+    <p style="font-weight: normal;">If you can, support your favourite artists in other ways like buying merch, physical media or attending live shows.</p>
   `;
   document.getElementById('result').innerHTML = resultMessage;
 
