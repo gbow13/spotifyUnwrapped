@@ -9,9 +9,10 @@ function calculateAndGenerate() {
   let monthlyCost = parseFloat(selectedPlan);
 
   // Adjust Duo plan to reflect cost per user
-  if (selectedPlan === "16.99") {
-    monthlyCost = monthlyCost / 2; // Divide Duo cost by 2
+  if (selectedPlan === "17.99") {
+  monthlyCost = monthlyCost / 2; // Divide Duo cost by 2
   }
+
 
   const yearlySubscription = monthlyCost * 12;
 
