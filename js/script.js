@@ -76,11 +76,11 @@ function generateImage(yearlySubscription, totalEarnings, userInput, inputType) 
            style="width: 380px; margin: 0 auto 40px; display: block;">
 
       <h2 style="font-size: 64px; margin-bottom: 40px; color: #1DB954;">
-        Spotify Unwrapped 2024
+        Spotify Unwrapped 2025
       </h2>
 
       <p style="font-size: 46px; margin-bottom: 20px;">
-        In 2024, I paid <strong>£${yearlySubscription.toFixed(2)}</strong> to Spotify.
+        In 2025, I paid <strong>£${yearlySubscription.toFixed(2)}</strong> to Spotify.
       </p>
 
       <p style="font-size: 46px; margin-bottom: 40px;">
@@ -113,7 +113,7 @@ function generateImage(yearlySubscription, totalEarnings, userInput, inputType) 
       imagePreview.innerHTML = `
         <p>Please share this image on your social media</p>
         <img src="${img}" alt="Generated Image" style="max-width: 100%; margin: 20px 0;" />
-        <a href="${img}" download="spotify-unwrapped-2024.jpg">Download</a>
+        <a href="${img}" download="spotify-unwrapped-2025.jpg">Download</a>
       `;
 
       // Remove the container after rendering
