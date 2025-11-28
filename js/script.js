@@ -5,11 +5,11 @@ function calculateAndGenerate() {
   const earningsPerStream = 1.28 / 543; // £1.28 for 543 streams
 
   // Get the selected plan value or default to Single (£11.99/month)
-  const selectedPlan = document.querySelector('input[name="plan"]:checked');
-  let monthlyCost = selectedPlan ? parseFloat(selectedPlan.value) : 11.99;
+  const selectedPlan = document.getElementById('plan').value;
+  let monthlyCost = parseFloat(selectedPlan);
 
   // Adjust Duo plan to reflect cost per user
-  if (selectedPlan && selectedPlan.value === "16.99") {
+  if (selectedPlan === "16.99") {
     monthlyCost = monthlyCost / 2; // Divide Duo cost by 2
   }
 
@@ -22,20 +22,27 @@ function calculateAndGenerate() {
 
   const totalEarnings = totalStreams * earningsPerStream;
 
-  // Update result text
-  const resultMessage = `
-  <p>Total Spotify subscription for the year: <strong><span class="highlight">£${yearlySubscription.toFixed(2)}</span></strong>.</p>
-  <p>Spotify paid approximately <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong> to your favorite artist.</p>
-  <p>Fully independent artists will receive all of that money. Artists signed to record labels could receive just 20%-50% of this amount.</p>
-  <p>If you can, support your favourite artists in other ways like buying merch, attending live shows (or subscribing to their OnlyFans).</p>
-`;
+    // Update result text
+    const resultMessage = `
+    <p>Total Spotify subscription for the year: <strong><span class="highlight">£${yearlySubscription.toFixed(2)}</span></strong>.</p>
+    <p>Spotify paid approximately <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong> to your favorite artist.</p>
+    <p style="font-weight: normal;">Fully independent artists will receive approx. 90% of that money. Artists signed to record labels could receive anywhere from 5% to 50% depending on their record deal.</p>
+    <p style="font-weight: normal;">If you can, support your favourite artists in other ways like buying merch, attending live shows, or <a href='https://www.independent.co.uk/arts-entertainment/music/news/kate-nash-onlyfans-earnings-tour-subscribers-b2657173.html' target='_blank' style='color: #1DB954;'>subscribing to their OnlyFans</a>.</p>
+  `;
   document.getElementById('result').innerHTML = resultMessage;
 
   // Generate Shareable Image
-  generateImage(yearlySubscription, totalEarnings.toFixed(2));
+  const userInput = streams > 0 ? streams : minutes;
+  const inputType = streams > 0 ? 'streams' : 'minutes';
+  generateImage(yearlySubscription, totalEarnings.toFixed(2), userInput, inputType);
+
+  // Automatically scroll to the results section
+  setTimeout(() => {
+    document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+  }, 500);
 }
 
-function generateImage(yearlySubscription, totalEarnings) {
+function generateImage(yearlySubscription, totalEarnings, userInput, inputType) {
   const resultContainer = document.createElement('div');
   resultContainer.className = 'result-container';
   resultContainer.style.cssText = `
@@ -52,11 +59,11 @@ function generateImage(yearlySubscription, totalEarnings) {
   `;
 
   resultContainer.innerHTML = `
-    <img src="images/logo.png" alt="Spotify Logo" style="width: 400px; margin-bottom: 30px;">
-    <h2 style="font-size: 64px; margin-bottom: 40px; color: #1DB954;">Spotify Unwrapped 2024</h2>
+    <img src="images/logo.png" alt="Spotify Unwrapped Logo" style="width: 600px; margin-bottom: 20px;">
+    <img src="images/spotify.png" alt="Spotify Logo" style="width: 700px; margin-bottom: 40px;">
     <p style="font-size: 48px; margin-bottom: 20px;">I paid <strong>£${yearlySubscription.toFixed(2)}</strong> to Spotify.</p>
-    <p style="font-size: 48px; margin-bottom: 40px;">Spotify paid <strong>£${totalEarnings}</strong> to my favorite artist.</p>
-    <p style="font-size: 32px; color: #666;">Find out how much Spotify paid your favorite artist at</p>
+    <p style="font-size: 48px; margin-bottom: 20px;">Spotify paid <strong>£${totalEarnings}</strong> to my favourite artist(s) for <strong>${userInput.toLocaleString()} ${inputType}</strong> played in 2024.</p>
+    <p style="font-size: 32px; color: #666;">Find out how much (or) Spotify paid your favorite artists at</p>
     <p style="font-size: 40px; font-weight: bold;">spotify-unwrapped.com</p>
   `;
 
@@ -73,10 +80,9 @@ function generateImage(yearlySubscription, totalEarnings) {
       const img = canvas.toDataURL('image/jpeg');
       const imagePreview = document.getElementById('imagePreview');
       imagePreview.innerHTML = `
-        <p>Please share the image below on your social media. Let's spread the word.</p>
+        <p>Please share this image on your social media and spread the word.</p>
         <img src="${img}" alt="Generated Image" style="max-width: 100%; margin: 20px 0;" />
         <a href="${img}" download="spotify-unwrapped-2024.jpg">Download</a>
-        
       `;
 
       // Remove the container after rendering
@@ -86,3 +92,4 @@ function generateImage(yearlySubscription, totalEarnings) {
       console.error("Error generating image:", error);
     });
 }
+

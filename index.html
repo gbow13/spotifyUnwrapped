@@ -6,28 +6,28 @@
   <title>Spotify Unwrapped</title>
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+  <meta property="og:title" content="Spotify Unwrapped" />
+  <meta property="og:description" content="Discover how much Spotify paid your favorite artist for your streams." />
+  <meta property="og:image" content="images/preview-image.jpg" />
+  <meta property="og:url" content="https://spotify-unwrapped.com" />
+  <meta property="og:type" content="website" />
+
 </head>
 <body>
   <div class="card">
-    <h1>Spotify Unwrapped</h1>
     <img src="images/logo.png" alt="Spotify Unwrapped Logo" style="max-width: 100px; margin: 20px auto; display: block;">
-    <h3>Get an idea of how much Spotify paid your favourite artist on your behalf.</h3>
+    <img src="images/spotify.png" alt="Spotify Unwrapped Logo" style="max-width: 300px; margin: 20px auto; display: block;">
+    <h3>How much do Spotify pay your favourite artist(s) on your behalf?</h3>
     <p>What Spotify plan do you have?</p>
-    <div class="radio-options">
-        <label for="single">Single (£11.99/month)</label>
-        <input type="radio" id="single" name="plan" value="11.99">
-      
-        <label for="student">Student (£5.99/month)</label>
-        <input type="radio" id="student" name="plan" value="5.99">
-      
-        <label for="duo">Duo (£16.99/month)</label>
-        <input type="radio" id="duo" name="plan" value="16.99">
-      
-        <label for="free">Free (no cost)</label>
-        <input type="radio" id="free" name="plan" value="0">
-      </div>
-      
-    <p>Enter the number of streams or minutes spent listening to an artist:</p>
+    
+    <!-- Dropdown Menu for Subscription Options -->
+    <select id="plan">
+      <option value="11.99" selected>Individual (£11.99/month)</option>
+      <option value="5.99">Student (£5.99/month)</option>
+      <option value="16.99">Duo (£16.99/month, split between 2 users)</option>
+    </select>
+    
+    <p>Enter the number of streams or minutes spent listening to an artist(s):</p>
     <input type="number" id="streams" placeholder="Number of streams">
     <input type="number" id="minutes" placeholder="Minutes spent listening">
     <button onclick="calculateAndGenerate()">Calculate</button>
@@ -37,93 +37,6 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <script>
-    function calculateAndGenerate() {
-      const streams = parseFloat(document.getElementById('streams').value) || 0;
-      const minutes = parseFloat(document.getElementById('minutes').value) || 0;
-      const averageSongLength = 3.5; // in minutes
-      const earningsPerStream = 1.28 / 543; // £1.28 for 543 streams
-
-      // Get the selected plan value or default to Single (£11.99/month)
-      const selectedPlan = document.querySelector('input[name="plan"]:checked');
-      const monthlyCost = selectedPlan ? parseFloat(selectedPlan.value) : 11.99;
-      const yearlySubscription = monthlyCost * 12;
-
-      let totalStreams = streams;
-      if (minutes > 0) {
-        totalStreams = minutes / averageSongLength; // Convert minutes to streams
-      }
-
-      const totalEarnings = totalStreams * earningsPerStream;
-
-      // Update result text
-      const resultMessage = `
-        <p>Total Spotify subscription for the year: <strong>£${yearlySubscription.toFixed(2)}</strong>.</p>
-        <p>Spotify paid approximately <strong>£${totalEarnings.toFixed(2)}</strong> to your favorite artist.</p>
-        <p>Fully independent artists will receive all of that money. Artists signed to record labels could receive just 20%-50% of this amount.</p>
-        <p>If you can, support your favourite artists in other ways like buying merch, attending live shows (or subscribing to their OnlyFans.)</p>
-      `;
-      document.getElementById('result').innerHTML = resultMessage;
-
-      // Generate Shareable Image
-      generateImage(yearlySubscription, totalEarnings.toFixed(2));
-    }
-
-    function generateImage(yearlySubscription, totalEarnings) {
-      const resultContainer = document.createElement('div');
-      resultContainer.className = 'result-container';
-      resultContainer.style.cssText = `
-        width: 1080px; 
-        height: 1920px; 
-        display: flex; 
-        flex-direction: column; 
-        justify-content: center; 
-        align-items: center; 
-        font-family: 'Poppins', sans-serif; 
-        background: linear-gradient(135deg, #811ba7, #0a0a0a); /* Gradient background */
-        text-align: center; 
-        color: #ffffff;
-        padding: 20px;
-        border-radius: 20px; /* Rounded corners */
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Shadow for depth */
-      `;
-
-      resultContainer.innerHTML = `
-        <img src="images/logo.png" alt="Spotify Logo" style="width: 300px; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-        <h2 style="font-size: 64px; margin-bottom: 20px; color: #1DB954; font-weight: bold;">Spotify Unwrapped 2024</h2>
-        <p style="font-size: 48px; margin-bottom: 20px; font-weight: 600;">I paid <strong>£${yearlySubscription.toFixed(2)}</strong> to Spotify.</p>
-        <p style="font-size: 48px; margin-bottom: 20px; font-weight: 600;">Spotify paid <strong>£${totalEarnings}</strong> to my favorite artist.</p>
-        <hr style="width: 80%; border: 1px solid #666; margin-bottom: 20px;">
-        <p style="font-size: 32px; color: #ddd; margin-bottom: 20px;">Find out how much Spotify paid your favorite artist at</p>
-        <p style="font-size: 40px; font-weight: bold; color: #ffffff;">spotify-unwrapped.com</p>
-      `;
-
-      // Temporarily append the container to the body for rendering
-      document.body.appendChild(resultContainer);
-
-      // Generate the image with high resolution
-      html2canvas(resultContainer, {
-        width: 1080,
-        height: 1920,
-        scale: 2, // Increase rendering scale for higher resolution
-      })
-        .then((canvas) => {
-          const img = canvas.toDataURL('image/jpeg');
-          const imagePreview = document.getElementById('imagePreview');
-          imagePreview.innerHTML = `
-            <img src="${img}" alt="Generated Image" style="max-width: 100%; margin: 20px 0;" />
-            <a href="${img}" download="spotify-unwrapped-2024.jpg">Download</a>
-            <p>Please share this image on your social media</p>
-          `;
-
-          // Remove the container after rendering
-          document.body.removeChild(resultContainer);
-        })
-        .catch((error) => {
-          console.error("Error generating image:", error);
-        });
-    }
-  </script>
   <script src="js/script.js"></script>
 </body>
 </html>
