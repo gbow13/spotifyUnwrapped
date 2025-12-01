@@ -1,55 +1,71 @@
 function calculateAndGenerate() {
   const streams = parseFloat(document.getElementById('streams').value) || 0;
   const minutes = parseFloat(document.getElementById('minutes').value) || 0;
-  const averageSongLength = 3.5; // in minutes
-  const earningsPerStream = 1.28 / 543; // £1.28 for 543 streams
 
-  // Get the selected plan value or default to Single (£11.99/month)
-  const selectedPlan = document.getElementById('plan').value;
-  let monthlyCost = parseFloat(selectedPlan);
+  // Average song length assumption
+  const averageSongLength = 3.5;
 
-  // Adjust Duo plan to reflect cost per user
-  if (selectedPlan === "17.99") {
-  monthlyCost = monthlyCost / 2; // Divide Duo cost by 2
+  // UK/USA average Spotify payout (rights holder earnings)
+  const earningsPerStream = 0.004;
+
+  // Require at least one input
+  if (streams === 0 && minutes === 0) {
+    alert("Please enter minutes or streams.");
+    return;
   }
 
+  // Decide whether user entered minutes or streams
+  let totalStreams;
+  let userInput;
+  let inputType;
 
-  const yearlySubscription = monthlyCost * 12;
-
-  let totalStreams = streams;
   if (minutes > 0) {
-    totalStreams = minutes / averageSongLength; // Convert minutes to streams
+    inputType = "minutes";
+    userInput = minutes;
+    totalStreams = minutes / averageSongLength;
+  } else {
+    inputType = "streams";
+    userInput = streams;
+    totalStreams = streams;
   }
 
   const totalEarnings = totalStreams * earningsPerStream;
 
-  // Update result text
+  // On-page result text
   const resultMessage = `
-    <p>Total Spotify subscription for the year: <strong><span class="highlight">£${yearlySubscription.toFixed(2)}</span></strong>.</p>
-    <p>Spotify paid approximately <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong> to your favorite artist.</p>
-    <p>Fully independent artists will receive all of that money. Artists signed to record labels could receive just 20%-50% of this amount.</p>
-    <p style="font-weight: normal;">If you can, support your favourite artists in other ways like buying merch, physical media or attending live shows.</p>
+    <p>Spotify paid the rights holder approximately 
+      <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong>
+      for your listening.</p>
+
+    <p style="font-weight: normal; font-size: 0.9em;">
+      The Maths: £0.004 per stream (which is a generous UK/USA weighted average). 
+    </p>
+      
+    <p style="font-weight: normal; font-size: 0.9em;">
+      The Deal: Fully independent artists will receive all of that money. Artists signed to record labels could receive just 20%-50% of this amount.
+    </p>
+
+    <p style="font-weight: normal;">
+      If you can, support your favourite artists in other ways like buying merch or physical media and
+      attending live shows.
+    </p>
   `;
-  document.getElementById('result').innerHTML = resultMessage;
 
-  // Figure out what the user actually entered (streams or minutes)
-  const userInput = streams > 0 ? streams : minutes;
-  const inputType = streams > 0 ? 'streams' : 'minutes';
+  document.getElementById("result").innerHTML = resultMessage;
 
-  // Generate Shareable Image
-  generateImage(yearlySubscription, totalEarnings.toFixed(2), userInput, inputType);
+  // Generate the shareable image
+  generateImage(totalEarnings.toFixed(2), userInput, inputType);
 
-  // Automatically scroll to the results section
+  // Smooth scroll to the results
   setTimeout(() => {
-    document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById("result").scrollIntoView({ behavior: "smooth" });
   }, 500);
 }
 
-function generateImage(yearlySubscription, totalEarnings, userInput, inputType) {
-  const resultContainer = document.createElement('div');
-  resultContainer.className = 'result-container';
+function generateImage(totalEarnings, userInput, inputType) {
+  const resultContainer = document.createElement("div");
 
-  // Main canvas styling – padded and boxed so text stays away from edges
+  resultContainer.className = "result-container";
   resultContainer.style.cssText = `
     width: 1080px;
     height: 1920px;
@@ -57,69 +73,55 @@ function generateImage(yearlySubscription, totalEarnings, userInput, inputType) 
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #811ba7, #0a0a0a);
+    padding: 120px 100px;
     text-align: center;
+    background: linear-gradient(135deg, #811ba7, #0a0a0a);
+    font-family: 'Poppins', sans-serif;
     color: #ffffff;
-    padding: 120px 100px;      /* big safe padding around edges */
-    box-sizing: border-box;    /* padding stays inside 1080x1920 */
+    box-sizing: border-box;
   `;
 
-  // Inner wrapper so text doesn't stretch too wide
   resultContainer.innerHTML = `
-    <div style="max-width: 880px; margin: 0 auto;">
-      <img src="images/logo.png"
-           alt="Spotify Unwrapped Logo"
-           style="width: 320px; margin: 0 auto 20px; display: block;">
-      <img src="images/spotify.png"
-           alt="Spotify Logo"
-           style="width: 380px; margin: 0 auto 40px; display: block;">
+    <img src="images/logo.png" style="width:320px; margin-bottom:20px;">
+    <img src="images/spotify.png" style="width:380px; margin-bottom:40px;">
 
-      <h2 style="font-size: 64px; margin-bottom: 40px; color: #1DB954;">
-        Spotify Unwrapped 2025
-      </h2>
+    <h2 style="font-size:64px; margin-bottom:40px; color:#1DB954;">
+      Spotify Unwrapped 2025
+    </h2>
 
-      <p style="font-size: 46px; margin-bottom: 20px;">
-        In 2025, I paid <strong>£${yearlySubscription.toFixed(2)}</strong> to Spotify.
-      </p>
+    <p style="font-size:46px; margin-bottom:30px;">
+      My favourite artists earned around <strong>£${totalEarnings}</strong>
+      from my ${userInput.toLocaleString()} ${inputType}. 
+    </p>
 
-      <p style="font-size: 46px; margin-bottom: 40px;">
-        Spotify paid <strong>£${totalEarnings}</strong> to my favorite artist
-        for ${userInput.toLocaleString()} ${inputType} of listening.
-      </p>
+    <p style="font-size:46px; margin-bottom:30px;">
+      To find out how much your streams were worth visit...
+    
+    </p>
 
-      <p style="font-size: 36px; margin-bottom: 16px; color: #dddddd;">
-        It’s time to <strong>#FixStreaming</strong>
-      </p>
 
-      <p style="font-size: 54px; font-weight: bold; margin-top: 10px;">
-        spotify-unwrapped.com
-      </p>
-    </div>
+
+    <p style="font-size:54px; font-weight:bold; margin-top:10px;">
+      spotify-unwrapped.com
+    </p>
+
   `;
 
-  // Temporarily append the container to the body for rendering
   document.body.appendChild(resultContainer);
 
-  // Generate the image with high resolution
   html2canvas(resultContainer, {
     width: 1080,
     height: 1920,
-    scale: 2, // Increase rendering scale for higher resolution
-  })
-    .then((canvas) => {
-      const img = canvas.toDataURL('image/jpeg');
-      const imagePreview = document.getElementById('imagePreview');
-      imagePreview.innerHTML = `
-        <p>Please share this image on your social media</p>
-        <img src="${img}" alt="Generated Image" style="max-width: 100%; margin: 20px 0;" />
-        <a href="${img}" download="spotify-unwrapped-2025.jpg">Download</a>
-      `;
+    scale: 2,
+  }).then((canvas) => {
+    const img = canvas.toDataURL("image/jpeg");
 
-      // Remove the container after rendering
-      document.body.removeChild(resultContainer);
-    })
-    .catch((error) => {
-      console.error("Error generating image:", error);
-    });
+    document.getElementById("imagePreview").innerHTML = `
+      <p>Please share this image on your social media</p>
+      <img src="${img}" style="max-width:100%; margin:20px 0;" />
+      <a href="${img}" download="spotify-unwrapped-2025.jpg">Download</a>
+    `;
+
+    document.body.removeChild(resultContainer);
+  });
 }

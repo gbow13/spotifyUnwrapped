@@ -1,38 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spotify Unwrapped</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
-  <meta property="og:title" content="Spotify Unwrapped" />
-  <meta property="og:description" content="Discover how much Spotify paid your favorite artist for your streams." />
-  <meta property="og:image" content="images/preview-image.jpg" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spotify Unwrapped 2025</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="icon" href="favicon.png" type="image/png" />
+
+  <!-- Open Graph for social previews -->
+  <meta property="og:title" content="Spotify Unwrapped 2025" />
+  <meta
+    property="og:description"
+    content="Discover how much Spotify paid your favorite artist's rights holder for your listening in 2025."
+  />
+  <meta property="og:image" content="https://spotify-unwrapped.com/images/preview-image.jpg" />
   <meta property="og:url" content="https://spotify-unwrapped.com" />
   <meta property="og:type" content="website" />
-
 </head>
 <body>
   <div class="card">
-    <img src="images/logo.png" alt="Spotify Unwrapped Logo" style="max-width: 100px; margin: 20px auto; display: block;">
-    <img src="images/spotify.png" alt="Spotify Unwrapped Logo" style="max-width: 300px; margin: 20px auto; display: block;">
-    <h3>How much do Spotify pay your favourite artist(s)?</h3>
-    <p>What Spotify plan do you have?</p>
-    
-    <!-- Dropdown Menu for Subscription Options -->
-    <select id="plan">
-      <option value="12.99" selected>Individual (£12.99/month)</option>
-      <option value="5.99">Student (£5.99/month)</option>
-      <option value="17.99">Duo (£17.99/month, split between 2 users)</option>
-    </select>
-    
-    
-    <p>Enter the number of streams or minutes spent listening to an artist(s):</p>
-    <input type="number" id="streams" placeholder="Number of streams">
-    <input type="number" id="minutes" placeholder="Minutes spent listening">
+    <img
+      src="images/logo.png"
+      alt="Spotify Unwrapped Logo"
+      style="max-width: 100px; margin: 20px auto; display: block;"
+    />
+    <img
+      src="images/spotify.png"
+      alt="Spotify Logo"
+      style="max-width: 300px; margin: 20px auto; display: block;"
+    />
+    <h3>How much did Spotify pay the rights holder for this artist?</h3>
+
+    <input type="number" id="streams" placeholder="Number of streams" />
+    <input type="number" id="minutes" placeholder="Minutes spent listening" />
     <button onclick="calculateAndGenerate()">Calculate</button>
-    <p><small>Note: We assume the average song lasts 3.5 minutes.</small></p>
+
+    <p>
+      <small>
+        We assume the average song lasts 3.5 minutes and use a rate of
+        £0.004 per stream.
+      </small>
+    </p>
+
     <div class="result" id="result"></div>
     <div id="imagePreview"></div>
   </div>
