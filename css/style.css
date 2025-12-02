@@ -69,11 +69,12 @@ button:focus {
   background: #282828;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   max-width: 500px;
-  margin: auto;
+  margin: 80px auto;   /* ⬅️ was maybe 20px, now shifted down */
   text-align: center;
 }
+
 
 @media (max-width: 600px) {
   body {
