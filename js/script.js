@@ -33,23 +33,14 @@ function calculateAndGenerate() {
 
   // On-page result text
   const resultMessage = `
-    <p>Spotify paid the rights holder approximately 
-      <strong><span class="highlight">£${totalEarnings.toFixed(2)}</span></strong>
-      for your listening.</p>
-
-    <p style="font-weight: normal; font-size: 0.9em;">
-      The Maths: £0.004 per stream (which is a generous UK/USA weighted average). 
-    </p>
-      
-    <p style="font-weight: normal; font-size: 0.9em;">
-      The Deal: Fully independent artists will receive all of that money. Artists signed to record labels could receive just 20%-50% of this amount.
-    </p>
-
-    <p style="font-weight: normal;">
-      If you can, support your favourite artists in other ways like buying merch or physical media and
-      attending live shows.
-    </p>
-  `;
+  <div class="uniform-text">
+    <p>Spotify paid the rights holder approximately £${totalEarnings.toFixed(2)} for your listening.</p>
+    <p>The Maths: £0.004 per stream (which is a generous UK/USA weighted average).</p>
+    <p>The Deal: Fully independent artists will receive all of that money. Artists signed to record labels could receive just 20%-50% of this amount.</p>
+    <p>If you can, support your favourite artists in other ways like buying merch or physical media and attending live shows.</p>
+    <p>Please share this image on your social media.</p>
+  </div>
+`;
 
   document.getElementById("result").innerHTML = resultMessage;
 
