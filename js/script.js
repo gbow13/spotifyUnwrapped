@@ -85,7 +85,7 @@ function generateImage(totalEarnings, userInput, inputType) {
     <img src="images/logo.png" style="width:320px; margin-bottom:20px;">
     <img src="images/spotify.png" style="width:380px; margin-bottom:40px;">
 
-    <h2 style="font-size:64px; margin-bottom:40px; color:#1DB954;">
+    <h2 style="font-size:46px; margin-bottom:40px; color:#1DB954;">
       Spotify Unwrapped 2025
     </h2>
 
