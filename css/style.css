@@ -89,10 +89,3 @@ button:focus {
     font-size: 1.1em;
   }
 }
-
-.uniform-text {
-  font-size: 1.1em;   /* choose any size you prefer */
-  font-weight: normal;
-  color: #ffffff;     /* white text */
-  line-height: 1.5;
-}
