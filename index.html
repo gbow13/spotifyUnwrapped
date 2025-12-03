@@ -22,19 +22,29 @@
   <meta property="og:image" content="https://spotify-unwrapped.com/images/preview-image.jpg" />
   <meta property="og:url" content="https://spotify-unwrapped.com" />
   <meta property="og:type" content="website" />
+
+  <!-- UNIFY ALL RESULT TEXT SIZE -->
+  <style>
+    .result p {
+      font-size: 16px !important;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 <body>
-  <div class="card">
+  <div class="card" style="margin-top: 40px;">
     <img
       src="images/logo.png"
       alt="Spotify Unwrapped Logo"
       style="max-width: 100px; margin: 0px auto; display: block;"
     />
+
     <img
       src="images/spotify.png"
       alt="Spotify Logo"
-      style="max-width: 300px; margin: 20px auto; display: block;"
+      style="max-width: 300px; margin: 10px auto 20px; display: block;"
     />
+
     <h3>How much did Spotify pay your favourite artist?</h3>
 
     <input type="number" id="streams" placeholder="Number of streams" />
